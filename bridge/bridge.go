@@ -315,6 +315,9 @@ func (b *Bridge) remove(containerId string, deregister bool) {
 var dockerSignaledBit = 128
 
 func (b *Bridge) shouldRemove(containerId string) bool {
+	if b.config.DeregisterCheck == "never" {
+		return false
+	}
 	if b.config.DeregisterCheck == "always" {
 		return true
 	}
