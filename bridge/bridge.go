@@ -253,7 +253,9 @@ func (b *Bridge) newService(port ServicePort, isgroup bool) *Service {
 	}
 	var p int
 	if b.config.Internal == true {
-		if b.config.HostIp == "" {
+		if b.config.HostIp != "" {
+			service.IP = b.config.HostIp
+		} else {
 			service.IP = port.ExposedIP
 		}
 		p, _ = strconv.Atoi(port.ExposedPort)
