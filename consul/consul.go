@@ -72,7 +72,7 @@ func (r *ConsulAdapter) Register(service *bridge.Service) error {
 func (r *ConsulAdapter) buildCheck(service *bridge.Service) *consulapi.AgentServiceCheck {
 	check := new(consulapi.AgentServiceCheck)
 	if path := service.Attrs["check_http"]; path != "" {
-		check.HTTP = fmt.Sprintf("http://%s:%d%s", service.IP, service.Port, path)
+		check.HTTP = fmt.Sprintf("http://%s:%s%s", service.Origin.ExposedIP, service.Origin.ExposedPort, path)
 		if timeout := service.Attrs["check_timeout"]; timeout != "" {
 			check.Timeout = timeout
 		}
