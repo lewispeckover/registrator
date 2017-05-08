@@ -252,7 +252,8 @@ func (b *Bridge) newService(port ServicePort, isgroup bool) *Service {
 		service.Name += "-" + port.ExposedPort
 	}
 	var p int
-	if b.config.Internal == true && port.HostIP == "" {
+	if b.config.Internal == true && port.HostPort == "" {
+		log.Println("internal service: ", service.ID)
 		if b.config.HostIp != "" {
 			service.IP = b.config.HostIp
 		} else {
